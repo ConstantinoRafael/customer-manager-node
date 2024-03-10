@@ -1,7 +1,8 @@
+import { connection } from "../database/database";
+
 async function getCustomers() {
-  return {
-    name: "teste",
-  };
+  const customers = await connection.query("SELECT * FROM customers");
+  return customers.rows;
 }
 
 const customersRepository = {
