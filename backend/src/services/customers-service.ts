@@ -1,3 +1,4 @@
+import { CreateCustomerParams } from "../protocols";
 import customersRepository from "../repositories/customers-repository";
 
 async function getCustomers() {
@@ -36,11 +37,24 @@ async function getCustomerByPhone(phone: string) {
   return customer;
 }
 
+async function createCustomer(params: CreateCustomerParams) {
+  const customerExist = await customersRepository.getCustomerByEmail(
+    params.email
+  );
+
+  if (customerExist.length > 0) {
+    throw { message: "There is already an user with given email" };
+  }
+
+  await customersRepository.createCustomer(params);
+}
+
 const customersService = {
   getCustomers,
   getCustomerByName,
   getCustomerByEmail,
   getCustomerByPhone,
+  createCustomer,
 };
 
 export default customersService;

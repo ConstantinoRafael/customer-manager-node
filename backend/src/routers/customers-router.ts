@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  createCustomer,
   getCustomerByEmail,
   getCustomerByName,
   getCustomerByPhone,
@@ -12,4 +13,5 @@ customersRouter
   .get("/", getCustomers)
   .get("/name/:name", getCustomerByName)
   .get("/email/:email", getCustomerByEmail)
-  .get("/phone/:phone", getCustomerByPhone);
+  .get("/phone/:phone", getCustomerByPhone)
+  .post("/", createCustomer);

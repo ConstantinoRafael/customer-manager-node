@@ -56,3 +56,18 @@ export async function getCustomerByPhone(req: Request, res: Response) {
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function createCustomer(req: Request, res: Response) {
+  const body = req.body;
+
+  try {
+    await customersService.createCustomer(body);
+
+    return res.sendStatus(httpStatus.CREATED);
+  } catch (error: any) {
+    if (error.message === "There is already an user with given email") {
+      return res.status(httpStatus.CONFLICT).send(error);
+    }
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
