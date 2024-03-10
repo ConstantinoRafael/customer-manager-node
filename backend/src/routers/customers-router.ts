@@ -1,6 +1,15 @@
 import { Router } from "express";
-import { getCustomers } from "../controllers/customers-controller";
+import {
+  getCustomerByEmail,
+  getCustomerByName,
+  getCustomerByPhone,
+  getCustomers,
+} from "../controllers/customers-controller";
 
 export const customersRouter = Router();
 
-customersRouter.get("/", getCustomers);
+customersRouter
+  .get("/", getCustomers)
+  .get("/name/:name", getCustomerByName)
+  .get("/email/:email", getCustomerByEmail)
+  .get("/phone/:phone", getCustomerByPhone);
