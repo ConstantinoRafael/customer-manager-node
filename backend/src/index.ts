@@ -1,11 +1,13 @@
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import { customersRouter } from "./routers/customers-router";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/health", (_req: Request, res: Response) => res.send("I am alive!"));
 
